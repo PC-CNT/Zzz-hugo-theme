@@ -1,0 +1,1068 @@
+$bg__github_dark: #0d1117;
+$bg__body: #222629;
+
+$bg__box__01: #1a1d20;
+
+$bg__toc__focus: #444343;
+$text__toc__focus: #ffffff;
+
+$text__for__darkmode: #f6f6f7;
+
+$border_color: #bebebe;
+// $border_color: #d3ff8c;
+
+// hsla(207, 34%, 49%, 1);
+
+$color__a__link: #2c86cf;
+$color__a__visited: #2da15a;
+
+$bg__section__common: #2e2e2e;
+
+$color__hr__border: #617781;
+
+$width__pc: 1024px;
+
+$padding__block: 12px 1rem;
+$paddig__table: 0.5em;
+
+@use "sass:color";
+
+@mixin box_sq_template {
+    background-color: $bg__box__01;
+}
+
+@mixin box_rd_template {
+    border-radius: 6px;
+    border: 2px solid $border_color;
+    padding: $padding__block;
+    background-color: $bg__box__01;
+}
+
+@mixin a__pseudo__class {
+    &:link, &:link:hover, &:visited, &:visited:hover, &:hover, &:active {
+        @content;
+    }
+}
+
+@mixin a__hover__color($color: #4141ff) {
+    color: $color;
+    &:hover {
+        color: color.scale($color, $lightness: 64%);
+    }
+}
+
+//* staticフォルダー内のリソースを参照する際はurl("/images/bg.jpg")のように最初にスラッシュをつける
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@300&display=swap');
+
+
+//* reset……というよりはnormalizeっぽいことを最初にする *//
+// TODO: 謎の余白を消したりする
+// TODO: [markup.highlight]の設定に依存した非常に脆弱なレイアウト
+// TODO: ~~横幅の挙動が意図したそれと違う~~　←なんかおま環っぽい
+
+
+//? その他のツール => レンダリング でダークモード切り替え表示
+//? chrome://flags/#enable-force-dark
+//* ういんどうず　の　せってい　とはべつで
+//* ぶらうざがわ　から
+//* ぎじてきな　だあくもおどに　かえられるよ
+
+
+
+html {
+    font-family: "IBM Plex Sans JP", "Meiryo", "Segoe UI", sans-serif;
+    font-feature-settings: "palt"1;
+    color: $text__for__darkmode;
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+// *https://zenn.dev/crayfisher_zari/articles/f6193ad6ec8a27
+
+body {
+    color-scheme: dark;
+    height: 100%;
+    margin: 0;
+    // background-color: $bg__github_dark;
+    background-color: $bg__body;
+}
+
+a {
+    text-decoration: none;
+    word-wrap: break-word;
+    background-color: transparent;
+
+    &:link {
+        @include a__hover__color($color__a__link);
+    }
+
+    &:visited {
+        @include a__hover__color($color__a__visited);
+    }
+}
+
+code {
+    font-family: "Consolas", "IBM Plex Sans JP", "Cascadia Mono", "Monaco", "Courier New", "Segoe UI", monospace;
+    background-color: $bg__github_dark;
+    &:not([data-lang]) {
+        border: 1px solid #6f6f6f;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 0.88em;
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+}
+
+//* ここ重要 テストに出る
+img {
+    max-width: 100%;
+}
+
+svg {
+    height: 1em;
+}
+
+.center {
+    text-align: center;
+}
+
+//* ↓↓↓github-markdown-cssでよくね？？？？
+.container {
+    h1,
+    h2 {
+        font-weight: bold;
+        padding-bottom: 0.2em;
+        border-bottom: 2px solid $color__hr__border;
+    }
+
+    p {
+        margin: 1.5em 0;
+        line-height: 1.6em;
+        letter-spacing: 0.04em;
+    }
+
+    img {
+        margin: 1em 0;
+    }
+
+    hr {
+        box-sizing: content-box;
+        overflow: hidden;
+        background: transparent;
+        border-bottom: 1px solid $color__hr__border;
+        height: .25em;
+        padding: 0;
+        margin: calc(1em + 24px) 0;
+        background-color: #30363d;
+        border: 0;
+    }
+}
+
+
+// table {
+//     margin: 0;
+// }
+
+
+//* ↑↑↑github-markdown-cssでよくね？？？？
+
+
+
+//! Gridの記述あり〼
+//* https://developer.mozilla.org/ja/docs/Web/CSS/Layout_cookbook/Sticky_footers
+
+#box {
+    height: 100%;
+}
+
+#content-wrapper {
+    min-height: 100%;
+    display: grid;
+    row-gap: 32px;
+    grid-template-areas:
+        "header"
+        "container"
+        "footer"
+    ;
+    // grid-template-rows: minmax(12vh, auto) 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+}
+
+header {
+    grid-area: header;
+
+    width: 100%;
+    @include box_sq_template();
+
+    text-align: center;
+
+    h1 {
+        margin: 0;
+        padding: 24px 0 24px;
+        a {
+            color: inherit;
+            text-decoration: none;
+            text-shadow: 4px 4px 4px #000;
+            @include a__pseudo__class {
+                text-decoration: none;
+                color: inherit;
+            }
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+
+.container {
+    grid-area: container;
+}
+
+//* https://note.com/takamoso/n/n82cdb89f024f
+//* https://zenn.dev/moneyforward/articles/css-grid-centering
+//* https://coliss.com/articles/build-websites/operation/css/how-to-use-css-minmax.html
+
+//* PC用
+@media screen and (min-width: $width__pc) {
+    .container {
+        display: grid;
+        gap: 2em;
+        grid-template-areas:
+            "main right_sidebar"
+        ;
+        grid-template-columns: minmax(auto, 60vw) 300px;
+        grid-template-rows: 1fr;
+        // padding: 0px calc(min(8em, 80px));
+        padding: 0px 2em;
+        // place-content: center;
+        justify-content: center;
+    }
+}
+
+//* モバイル用
+@media screen and (max-width: $width__pc) {
+    .container {
+        display: grid;
+        // gap: 40px;
+        grid-template-areas:
+            "main"
+        ;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        padding: 0 0.5rem;
+    }
+
+    #right-sidebar {
+        display: none;
+    }
+}
+
+
+#right-sidebar {
+    grid-area: right_sidebar;
+    @include box_rd_template();
+
+    >div {
+        // border: 2px solid #ccc
+    }
+
+    ul {
+        margin: 1.4em 0;
+        padding-left: 1.5em;
+        line-height: 1.8em;
+    }
+
+    #Recent_Posts {
+        ul {
+            font-size: 0.96em;
+            list-style: none;
+            padding: 0;
+        }
+    }
+
+    #side-toc {
+        // display: flex;
+        position: sticky;
+        top: 24px;
+
+        #TableOfContents {
+            overflow-y: auto;
+            max-height: 80vh;
+            // font-size: 0.9rem;
+            >ol {
+                padding: 0;
+                ol {
+                    list-style-type: none;
+                    counter-reset: item;
+                    padding-left: 1em;
+                    // margin: 0;
+                }
+    
+                li {
+                    margin: 2px 0px;
+                }
+    
+                a {
+                    display: block;
+                    width: 100%;
+                    padding: 2px;
+                    // line-height: 1;
+    
+                    // *https://developer.mozilla.org/ja/docs/Web/CSS/:visited
+                    &:visited {
+                        color: $color__a__link;
+                    }
+    
+                    &:hover,
+                    &.focus {
+                        background-color: $bg__toc__focus;
+                        color: $text__toc__focus;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+main {
+    grid-area: main;
+    //* https://stackoverflow.com/questions/53599625/css-grid-pre-horizontal-scroll 神の一手
+    min-width: 0;
+    @include box_rd_template();
+
+
+    #permalink {
+        @include a__hover__color(#eee);
+    }
+
+    article {
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    table {
+        border-collapse: collapse;
+
+        th {
+            border: solid 2px;
+            padding: $paddig__table;
+        }
+
+        td {
+            border: solid 1px;
+            // border: 1px solid #30363d;
+            padding: $paddig__table;
+        }
+    }
+
+    img {
+        max-width: 88%;
+        height: auto;
+    }
+
+    nav.breadcrumb {
+        // list-style: none;
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+            li:not(:last-child)::after {
+                display: inline-block;
+                content: ">";
+                margin-left: 0.5em;
+                margin-right: 0.5em;
+            }
+        }
+    }
+
+    .footnotes {
+        ol {
+            padding-left: 1.6em;
+        }
+
+        p {
+            margin: .5em;
+        }
+    }
+
+    section {
+        background-color: $bg__section__common;
+        padding: 1em;
+        margin: 16px 0;
+        border: 1px #b1bed3 solid;
+        a {
+            color: $color__a__link;
+            text-decoration: none;
+            &:visited, &:link {
+                @include a__hover__color($color__a__link);
+            }
+        }
+        .summary {
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+    }
+}
+
+
+.a_few_space {
+    min-width: 16vh;
+    min-height: 16vh;
+}
+
+
+.box-share {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    > div {
+        svg {
+            width: 36px;
+            height: 36px;
+            transition: transform 0.3s ease;
+            &:hover {
+                transform: scale(1.3);
+            }
+        }
+    }
+}
+
+
+footer {
+    grid-area: footer;
+
+    width: 100%;
+    // min-height: 16vh;
+    // height: 10vh;
+    // top: 100vh;
+    padding: 12px;
+    // background-color: $bg_color_01;
+    @include box_sq_template();
+
+    text-align: center;
+    a {
+        color: inherit;
+        text-decoration: none;
+        &:hover, &:visited {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+}
+
+
+#footer-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 20px;
+    * {
+        margin: 0;
+    }
+}
+
+
+
+//* _internal/pagination.html 関連
+
+.pagination {
+    // display: inline-block;
+    display: flex;
+    padding-left: 0;
+    margin: 24px 0;
+    border-radius: 4px;
+    justify-content: center;
+    >li {
+        display: inline;
+        >a,
+        >span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #337ab7;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+
+            &:hover,
+            &:focus {
+                z-index: 2;
+                color: #23527c;
+                background-color: #eee;
+                border-color: #ddd;
+            }
+        }
+
+        &:first-child {
+            >a,
+            >span {
+                margin-left: 0;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+        }
+
+        &:last-child {
+            >a,
+            >span {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+        }
+    }
+
+    >.active {
+        >a,
+        >span {
+            z-index: 3;
+            color: #fff;
+            cursor: default;
+            background-color: #337ab7;
+            border-color: #337ab7;
+            &:hover,
+            &:focus {
+                z-index: 3;
+                color: #fff;
+                cursor: default;
+                background-color: #337ab7;
+                border-color: #337ab7;
+            }
+        }
+    }
+
+    >.disabled {
+        >span,
+        >a {
+            color: #777;
+            cursor: not-allowed;
+            background-color: #fff;
+            border-color: #ddd;
+            &:hover,
+            &:focus {
+                color: #777;
+                cursor: not-allowed;
+                background-color: #fff;
+                border-color: #ddd;
+            }
+        }
+    }
+}
+
+//* _internal/pagination.html 関連終了
+
+
+
+
+
+//* ↓ここからsyntax関連
+
+
+.code_block {
+    overflow-x: auto;
+    .code-filename {
+        padding: 0.2em;
+        background-color: #323e52;
+        display: inline-block;
+
+        border-radius: 6px 6px 0 0;
+        border-top: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+
+        span {
+            color: #ffffff;
+            font-size: 0.8rem;
+            padding: 0 1em;
+        }
+    }
+
+    .highlight {
+        pre.chroma {
+            background-color: $bg__github_dark;
+            font-size: 0.9rem;
+            margin: 0;
+            padding: 2px 5px;
+            overflow: auto;
+            // max-height: 600px;
+
+            // background-color: #1a2638;
+            // background-color: #272822;
+            // background-color: #323e52;
+            border-radius: 0 6px 6px 6px;
+            // border: 1px solid #8f9194;
+            border: 1px solid $border_color;
+
+            code {
+                display: inline-block;
+                padding: 1em 0;
+            }
+        }
+
+
+        /* Background */
+        .bg {
+            color: #c9d1d9;
+            background-color: #0d1117;
+        }
+
+        /* PreWrapper */
+        .chroma {
+            color: #c9d1d9;
+            background-color: #0d1117;
+        }
+
+        /* Other */
+        .chroma .x {}
+
+        /* Error */
+        .chroma .err {
+            color: #f85149;
+        }
+
+        /* CodeLine */
+        .chroma .cl {}
+
+        /* LineLink */
+        .chroma .lnlinks {
+            outline: none;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* LineTableTD */
+        .chroma .lntd {
+            vertical-align: top;
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        /* LineTable */
+        .chroma .lntable {
+            border-spacing: 0;
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        /* LineHighlight */
+        .chroma .hl {
+            background-color: #ffffcc;
+        }
+
+        /* LineNumbersTable */
+        .chroma .lnt {
+            white-space: pre;
+            user-select: none;
+            margin-right: 0.4em;
+            padding: 0 0.4em 0 0.4em;
+            color: #64686c;
+        }
+
+        /* LineNumbers */
+        .chroma .ln {
+            white-space: pre;
+            user-select: none;
+            margin-right: 0.4em;
+            padding: 0 0.4em 0 0.4em;
+            color: #6e7681;
+        }
+
+        /* Line */
+        .chroma .line {
+            display: flex;
+        }
+
+        /* Keyword */
+        .chroma .k {
+            color: #ff7b72;
+        }
+
+        /* KeywordConstant */
+        .chroma .kc {
+            color: #79c0ff;
+        }
+
+        /* KeywordDeclaration */
+        .chroma .kd {
+            color: #ff7b72;
+        }
+
+        /* KeywordNamespace */
+        .chroma .kn {
+            color: #ff7b72;
+        }
+
+        /* KeywordPseudo */
+        .chroma .kp {
+            color: #79c0ff;
+        }
+
+        /* KeywordReserved */
+        .chroma .kr {
+            color: #ff7b72;
+        }
+
+        /* KeywordType */
+        .chroma .kt {
+            color: #ff7b72;
+        }
+
+        /* Name */
+        .chroma .n {}
+
+        /* NameAttribute */
+        .chroma .na {}
+
+        /* NameBuiltin */
+        .chroma .nb {}
+
+        /* NameBuiltinPseudo */
+        .chroma .bp {}
+
+        /* NameClass */
+        .chroma .nc {
+            color: #f0883e;
+            font-weight: bold;
+        }
+
+        /* NameConstant */
+        .chroma .no {
+            color: #79c0ff;
+            font-weight: bold;
+        }
+
+        /* NameDecorator */
+        .chroma .nd {
+            color: #d2a8ff;
+            font-weight: bold;
+        }
+
+        /* NameEntity */
+        .chroma .ni {
+            color: #ffa657;
+        }
+
+        /* NameException */
+        .chroma .ne {
+            color: #f0883e;
+            font-weight: bold;
+        }
+
+        /* NameFunction */
+        .chroma .nf {
+            color: #d2a8ff;
+            font-weight: bold;
+        }
+
+        /* NameFunctionMagic */
+        .chroma .fm {}
+
+        /* NameLabel */
+        .chroma .nl {
+            color: #79c0ff;
+            font-weight: bold;
+        }
+
+        /* NameNamespace */
+        .chroma .nn {
+            color: #ff7b72;
+        }
+
+        /* NameOther */
+        .chroma .nx {}
+
+        /* NameProperty */
+        .chroma .py {
+            color: #79c0ff;
+        }
+
+        /* NameTag */
+        .chroma .nt {
+            color: #7ee787;
+        }
+
+        /* NameVariable */
+        .chroma .nv {
+            color: #79c0ff;
+        }
+
+        /* NameVariableClass */
+        .chroma .vc {}
+
+        /* NameVariableGlobal */
+        .chroma .vg {}
+
+        /* NameVariableInstance */
+        .chroma .vi {}
+
+        /* NameVariableMagic */
+        .chroma .vm {}
+
+        /* Literal */
+        .chroma .l {
+            color: #a5d6ff;
+        }
+
+        /* LiteralDate */
+        .chroma .ld {
+            color: #79c0ff;
+        }
+
+        /* LiteralString */
+        .chroma .s {
+            color: #a5d6ff;
+        }
+
+        /* LiteralStringAffix */
+        .chroma .sa {
+            color: #79c0ff;
+        }
+
+        /* LiteralStringBacktick */
+        .chroma .sb {
+            color: #a5d6ff;
+        }
+
+        /* LiteralStringChar */
+        .chroma .sc {
+            color: #a5d6ff;
+        }
+
+        /* LiteralStringDelimiter */
+        .chroma .dl {
+            color: #79c0ff;
+        }
+
+        /* LiteralStringDoc */
+        .chroma .sd {
+            color: #a5d6ff;
+        }
+
+        /* LiteralStringDouble */
+        .chroma .s2 {
+            color: #a5d6ff;
+        }
+
+        /* LiteralStringEscape */
+        .chroma .se {
+            color: #79c0ff;
+        }
+
+        /* LiteralStringHeredoc */
+        .chroma .sh {
+            color: #79c0ff;
+        }
+
+        /* LiteralStringInterpol */
+        .chroma .si {
+            color: #a5d6ff;
+        }
+
+        /* LiteralStringOther */
+        .chroma .sx {
+            color: #a5d6ff;
+        }
+
+        /* LiteralStringRegex */
+        .chroma .sr {
+            color: #79c0ff;
+        }
+
+        /* LiteralStringSingle */
+        .chroma .s1 {
+            color: #a5d6ff;
+        }
+
+        /* LiteralStringSymbol */
+        .chroma .ss {
+            color: #a5d6ff;
+        }
+
+        /* LiteralNumber */
+        .chroma .m {
+            color: #a5d6ff;
+        }
+
+        /* LiteralNumberBin */
+        .chroma .mb {
+            color: #a5d6ff;
+        }
+
+        /* LiteralNumberFloat */
+        .chroma .mf {
+            color: #a5d6ff;
+        }
+
+        /* LiteralNumberHex */
+        .chroma .mh {
+            color: #a5d6ff;
+        }
+
+        /* LiteralNumberInteger */
+        .chroma .mi {
+            color: #a5d6ff;
+        }
+
+        /* LiteralNumberIntegerLong */
+        .chroma .il {
+            color: #a5d6ff;
+        }
+
+        /* LiteralNumberOct */
+        .chroma .mo {
+            color: #a5d6ff;
+        }
+
+        /* Operator */
+        .chroma .o {
+            color: #ff7b72;
+            font-weight: bold;
+        }
+
+        /* OperatorWord */
+        .chroma .ow {
+            color: #ff7b72;
+            font-weight: bold;
+        }
+
+        /* Punctuation */
+        .chroma .p {}
+
+        /* Comment */
+        .chroma .c {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        /* CommentHashbang */
+        .chroma .ch {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        /* CommentMultiline */
+        .chroma .cm {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        /* CommentSingle */
+        .chroma .c1 {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        /* CommentSpecial */
+        .chroma .cs {
+            color: #8b949e;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        /* CommentPreproc */
+        .chroma .cp {
+            color: #8b949e;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        /* CommentPreprocFile */
+        .chroma .cpf {
+            color: #8b949e;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        /* Generic */
+        .chroma .g {}
+
+        /* GenericDeleted */
+        .chroma .gd {
+            color: #ffa198;
+            background-color: #490202;
+        }
+
+        /* GenericEmph */
+        .chroma .ge {
+            font-style: italic;
+        }
+
+        /* GenericError */
+        .chroma .gr {
+            color: #ffa198;
+        }
+
+        /* GenericHeading */
+        .chroma .gh {
+            color: #79c0ff;
+            font-weight: bold;
+        }
+
+        /* GenericInserted */
+        .chroma .gi {
+            color: #56d364;
+            background-color: #0f5323;
+        }
+
+        /* GenericOutput */
+        .chroma .go {
+            color: #8b949e;
+        }
+
+        /* GenericPrompt */
+        .chroma .gp {
+            color: #8b949e;
+        }
+
+        /* GenericStrong */
+        .chroma .gs {
+            font-weight: bold;
+        }
+
+        /* GenericSubheading */
+        .chroma .gu {
+            color: #79c0ff;
+        }
+
+        /* GenericTraceback */
+        .chroma .gt {
+            color: #ff7b72;
+        }
+
+        /* GenericUnderline */
+        .chroma .gl {
+            text-decoration: underline;
+        }
+
+        /* TextWhitespace */
+        .chroma .w {
+            color: #6e7681;
+        }
+    }
+}

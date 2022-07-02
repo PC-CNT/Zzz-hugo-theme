@@ -1,0 +1,7 @@
+<style type="text/css">
+    {{ with .Site.Params.variableCSS.images.bg_header }}
+        header {
+            background-image: url("{{ . }}");
+        }
+    {{ end }}
+</style>

@@ -1,0 +1,10 @@
+{{ $opts := dict "transpiler" "dartsass" }}
+
+{{ $style := resources.Get "scss/style.scss" | toCSS $opts | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+
+{{/*  <link rel="stylesheet" href="/css/syntax.css">  */}}
+
+{{ if .Site.Params.variableCSS }}
+    {{ partial "css/v_css.html" . }}
+{{ end }}

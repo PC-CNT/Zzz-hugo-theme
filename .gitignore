@@ -1,0 +1,6 @@
+/exampleSite/
+/assets/scss/*
+!/assets/scss/*.scss
+/static/images/favicon.*
+/resources/_gen/
+/.hugo_build.lock

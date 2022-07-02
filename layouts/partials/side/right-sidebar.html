@@ -1,0 +1,41 @@
+<aside id="right-sidebar">
+
+    <div>
+        <h2>何かしらのコンテンツ</h2>
+    </div>
+
+    <div id="Recent_Posts">
+        <h2>最近の投稿</h2>
+        <ul>
+            {{ range first 10 .Site.RegularPages.ByDate.Reverse }}
+            <li>
+                <div>
+                    <a href="{{ .Permalink }}">
+                        <div>
+                        </div>
+                        <div>
+                            <div>
+                                {{ .Name }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+
+    <!-- https://github.com/gohugoio/hugo/issues/10543 -->
+    {{- if and (ne .TableOfContents "") (ne .TableOfContents `<nav id="TableOfContents"></nav>`) }}
+    <div id="side-toc">
+        <div>
+            <h2>目次</h2>
+        </div>
+        {{- .TableOfContents -}}
+    </div>
+    {{- end -}}
+
+    <div class="a_few_space">
+
+    </div>
+</aside>
