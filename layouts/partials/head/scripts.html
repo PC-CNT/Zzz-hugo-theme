@@ -1,0 +1,36 @@
+<script src="/js/code.js" defer></script>
+{{ if .IsPage }}
+<script src="/js/toc.js" defer></script>
+{{ end }}
+{{- if .HasShortcode "soundcloud" }}
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        let script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = "/js/api.js";
+        script.onload = function() {
+            document.querySelectorAll(`.soundcloud`).forEach((c) => {
+                c.querySelector("input.input_volume").addEventListener("input", event => {
+                    // console.log(event.target.value)
+                    SC.Widget(c.querySelector(`iframe`)).setVolume(event.target.value);
+                })
+            })
+        }
+        script.onerror = function() {}
+        document.head.appendChild(script);
+    })
+</script>
+{{ end -}}
+
+{{- if .HasShortcode "codepen" }}
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+{{ end -}}
+
+{{- if .Site.Params.norightclick -}}
+<script>
+    document.addEventListener("contextmenu", function(event) {
+        alert("右クリック禁止です！")
+        event.preventDefault();
+    })
+</script>
+{{- end -}}

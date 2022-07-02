@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ site.LanguageCode }}" dir="{{ default `ltr` }}">
+
+<head>
+    {{- partial "head/head.html" . -}}
+    {{- partial "head/style.html" . -}}
+    {{- partial "head/scripts.html" . }}
+</head>
+
+<body>
+    <div id="box">
+        <div id="content-wrapper">
+            {{ partial "header/header.html" . }}
+            <div class="container">
+                <main>
+                    {{ block "main" . }}{{ end }}
+                </main>
+                {{- partial "side/right-sidebar.html" . -}}
+            </div>
+            <footer>
+                {{ block "footer" . }}{{ partial "footer/footer.html" . }}{{ end }}
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

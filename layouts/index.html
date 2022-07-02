@@ -1,0 +1,12 @@
+{{- define "main" -}}
+<div>
+    {{ $paginator := .Paginate (.Site.RegularPages.ByDate.Reverse) 10 }}
+    {{ range $paginator.Pages }}
+        {{ partial "page_block" . }}
+    {{ end }}
+</div>
+
+<div>
+    {{ template "_internal/pagination.html" . }}
+</div>
+{{- end -}}

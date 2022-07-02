@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>
+    {{- with .Params.Title -}}{{ . }} | {{ end }}{{- .Site.Title -}}
+</title>
+<meta property="og:title" content="{{- with .Params.Title -}}{{ . }} | {{ end }}{{- .Site.Title -}}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="{{ .Site.LanguageCode }}">
+
+<link rel="alternate" href="{{ absURL `index.xml` }}" type="application/rss+xml" title="RSS">
+
+{{ if .Params.Description -}}
+<meta name="description" content="{{ .Params.Description }}">
+<meta property="og:description" content="{{ .Params.Description }}">
+{{- else if .Summary -}}
+<meta name="description" content="{{ .Summary }}">
+<meta property="og:description" content="{{ .Summary }}">
+{{- end -}}
+
+{{- if .IsHome -}}
+<meta property="og:type" content="website">
+{{ else }}
+<meta property="og:type" content="{{ default `article` }}">
+<meta property="article:section" content="{{ .Section }}">
+{{- end -}}
+
+{{- if .Page.Resources.GetMatch .Params.image -}}
+<meta property="og:image" content="{{ (.Page.Resources.GetMatch .Params.image).Permalink }}">
+{{ else if .Site.Params.favicon }}
+<meta property="og:image" content="{{ .Site.Params.favicon | absURL }}">
+{{- end }}
+
+{{ template "_internal/twitter_cards.html" . }}
+
+{{- with .Site.Params.favicon -}}
+{{ if eq ( path.Ext .) ".svg" }}
+<link rel="icon" type="image/svg+xml" href="{{ . }}">
+{{ else if ne ( path.Ext . ) ".ico" }}
+<link rel="icon" type="image/{{ replace ( path.Ext . ) `.` `` }}" href="{{ . }}">
+{{ else }}
+<link rel="icon" type="image/x-icon" href="{{ . }}">
+{{ end }}
+{{- end -}}

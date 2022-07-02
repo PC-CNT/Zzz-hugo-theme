@@ -1,0 +1,983 @@
+$bg__code: #282a36;
+$bg__body: #222629;
+$bg__box__01: #1a1d20;
+$color__text__toc: #b6b6b6;
+$bg__toc__focus: #434343;
+$text__for__darkmode: #f6f6f7;
+$bg__section__common: #303030;
+$color__hr__border: #617781;
+$width__pc: 1160px;
+$paddig__table: 0.5em;
+
+@use "sass:color";
+
+@mixin box_rd_template {
+    border-radius: 6px;
+    padding: 24px;
+    background-color: $bg__box__01;
+}
+
+@mixin a__hover__color($color: #4141ff) {
+    color: $color;
+
+    &:hover {
+        color: color.scale($color, $lightness: 44%);
+    }
+}
+
+//* staticフォルダー内のリソースを参照する際はurl("/images/bg.jpg")のように最初にスラッシュをつける
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@300&display=swap');
+
+html {
+    font-family: "IBM Plex Sans JP", "Meiryo", "Segoe UI", sans-serif;
+    font-feature-settings: "palt"1;
+    color: $text__for__darkmode;
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    color-scheme: dark;
+    height: 100%;
+    margin: 0;
+    background-color: $bg__body;
+}
+
+a {
+    text-decoration: none;
+    word-wrap: break-word;
+    background-color: transparent;
+}
+
+code {
+    font-family: "Consolas", "Cascadia Mono", "Monaco", "Courier New", "Segoe UI", monospace;
+}
+
+
+//* ここ重要 テストに出る
+img {
+    display: block;
+    max-width: 100%;
+}
+
+svg {
+    height: 1em;
+    align-items: center;
+}
+
+
+.container {
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-weight: bold;
+        margin-bottom: 1em;
+        border-bottom: 2px solid $color__hr__border;
+    }
+
+    p {
+        // margin: 1em 0;
+        line-height: 1.6em;
+        letter-spacing: 0.04em;
+    }
+
+    hr {
+        box-sizing: content-box;
+        overflow: hidden;
+        background: transparent;
+        border-bottom: 1px solid $color__hr__border;
+        height: .25em;
+        padding: 0;
+        margin: calc(1em + 24px) 0;
+        background-color: #30363d;
+        border: 0;
+    }
+}
+
+#box {
+    height: 100%;
+}
+
+#content-wrapper {
+    min-height: 100%;
+    display: grid;
+    row-gap: 48px;
+    grid-template-areas:
+        "header"
+        "container"
+        "footer"
+    ;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+}
+
+header {
+    grid-area: header;
+
+    width: 100%;
+    background-color: $bg__box__01;
+    text-align: center;
+
+    #title {
+        margin: 0;
+        padding: 24px 0 24px;
+
+        a {
+            font-size: 2.4em;
+            // font-weight: bold;
+            color: inherit;
+            text-decoration: none;
+            text-shadow: 4px 4px 4px #000;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+
+.container {
+    grid-area: container;
+}
+
+//* https://note.com/takamoso/n/n82cdb89f024f
+//* https://zenn.dev/moneyforward/articles/css-grid-centering
+//* https://coliss.com/articles/build-websites/operation/css/how-to-use-css-minmax.html
+
+//* PC用
+@media screen and (min-width: $width__pc) {
+    .container {
+        display: grid;
+        column-gap: calc((100vw - $width__pc) * 0.04 + 1vw);
+        grid-template-areas:
+            "main right_sidebar"
+        ;
+        grid-template-columns: minmax(auto, 820px) 320px;
+        grid-template-rows: 1fr;
+        padding: 0 6vw;
+        // place-content: center;
+        justify-content: center;
+    }
+
+    main {
+        @include box_rd_template();
+    }
+}
+
+//* モバイル用
+@media screen and (max-width: $width__pc) {
+    .container {
+        display: grid;
+        grid-template-areas:
+            "main"
+        ;
+        grid-template-columns: minmax(auto, 840px);
+        grid-template-rows: 1fr;
+        justify-content: center;
+        padding: 0;
+    }
+
+    main {
+        padding: 1em;
+        border-radius: 6px;
+        background-color: $bg__box__01;
+    }
+
+    #right-sidebar {
+        display: none;
+    }
+}
+
+
+#right-sidebar {
+    grid-area: right_sidebar;
+    // font-size: 0.96em;
+
+    #Recent_Posts {
+        @include box_rd_template();
+        margin-bottom: 36px;
+
+        ul {
+            list-style: none;
+            padding-left: 0.5em;
+            margin: 1.4em 0;
+
+            li {
+                // border-bottom: 1px #707070 solid;
+                margin-bottom: 1em;
+
+                a {
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    #side-toc {
+        @include box_rd_template();
+        position: sticky;
+        top: 24px;
+
+        #TableOfContents {
+            overflow-y: auto;
+            max-height: 80vh;
+
+            >ol {
+                padding: 0;
+
+                ol {
+                    list-style-type: none;
+                    counter-reset: item;
+                    padding-left: 1em;
+                    // margin: 0;
+                }
+
+                li {
+                    margin: 2px 0px;
+                }
+
+                a {
+                    display: block;
+                    width: 100%;
+                    padding: 2px;
+                    // line-height: 1;
+                    color: $color__text__toc;
+
+                    // *https://developer.mozilla.org/ja/docs/Web/CSS/:visited
+                    &:visited {
+                        color: $color__text__toc;
+                    }
+
+                    &:hover {
+                        color: color.scale($color__text__toc, $lightness: 92%);
+                    }
+
+                    &.focus {
+                        background-color: $bg__toc__focus;
+                        color: color.scale($color__text__toc, $lightness: 92%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+main {
+    grid-area: main;
+    //* https://stackoverflow.com/questions/53599625/css-grid-pre-horizontal-scroll 神の一手
+    min-width: 0;
+
+    // display: grid;
+    // grid-template-columns: 100%;
+
+    #permalink {
+        color: #eee;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+
+    .heading {
+        cursor: pointer;
+
+        a {
+
+            // color: $text__for__darkmode;
+            &:hover {
+                opacity: 0.8;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    article {
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        #before-content {
+            margin-bottom: 36px;
+
+            nav.breadcrumb {
+
+                // list-style: none;
+                ul {
+                    display: flex;
+                    flex-wrap: wrap;
+                    list-style: none;
+                    padding: 0;
+
+                    li:not(:last-child)::after {
+                        display: inline-block;
+                        content: "»";
+                        margin-left: 6px;
+                        margin-right: 6px;
+                    }
+                }
+            }
+        }
+
+        .tag {
+            background-color: #333;
+            border-radius: 4px;
+            padding: 4px 6px;
+            color: $text__for__darkmode;
+            margin-right: 8px;
+        }
+    }
+
+    #content {
+        min-height: 40vh;
+    }
+
+    table {
+        border-collapse: collapse;
+
+        th {
+            border: solid 2px;
+            padding: $paddig__table;
+        }
+
+        td {
+            border: solid 1px;
+            padding: $paddig__table;
+        }
+    }
+
+    img {
+        height: auto;
+        margin: 1em 0;
+    }
+
+    iframe {
+        margin: 12px 0;
+        max-width: 100%;
+    }
+
+    :not(pre) {
+        >code {
+            background-color: $bg__code;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.88em;
+        }
+    }
+
+    .footnotes {
+        ol {
+            padding-left: 1.6em;
+        }
+
+        p {
+            margin: .5em;
+        }
+    }
+
+    .input_volume {
+        cursor: pointer;
+        width: 50%;
+    }
+
+    section {
+        // @include box_rd_template();
+        background-color: #222629;
+        padding: 1em;
+        margin-bottom: 24px;
+        border-radius: 6px;
+
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .summary {
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+    }
+
+    #after-content {
+        margin: 24px 0;
+
+        .box-share {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-bottom: 4vh;
+
+            >div {
+                svg {
+                    width: 32px;
+                    height: 32px;
+                    transition: transform 0.3s ease;
+
+                    &:hover {
+                        transform: scale(1.3);
+                    }
+                }
+            }
+        }
+
+        .related {
+            margin-bottom: 4vh;
+        }
+
+        .comment {
+            margin-bottom: 4vh;
+        }
+
+        .pager {
+            margin-bottom: 4vh;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid $color__hr__border;
+            padding: 1em 0;
+
+
+            .prev {
+                // flex-basis: 48%;
+                margin-right: auto;
+                width: 50%;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M40.76 163.12.2 82 40.76.88m4.48 2.24L5.8 82l39.44 78.88m0-157.76" pointer-events="all"/></svg>') no-repeat center left;
+                padding: 0 1em 0 2em;
+            }
+
+            .next {
+                border-left: 1px solid #fff;
+                text-align: right;
+                // flex-basis: 48%;
+                margin-left: auto;
+                width: 50%;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M.76 160.88 40.2 82 .76 3.12M5.24.88 45.8 82 5.24 163.12M5.24.88" pointer-events="all" /></svg>') no-repeat center right;
+                padding: 0 2em 0 1em;
+            }
+        }
+    }
+}
+
+
+footer {
+    grid-area: footer;
+
+    width: 100%;
+    padding: 12px 24px;
+    background-color: $bg__box__01;
+
+    text-align: center;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover,
+        &:visited {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+
+    #footer-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        // padding: 12px 20px;
+    }
+}
+
+//* _internal/pagination.html 関連
+
+.pagination {
+    font-size: 1.2em;
+    display: flex;
+    padding-left: 0;
+    margin: 24px 0;
+    justify-content: center;
+
+    >li {
+        display: inline;
+
+        >a,
+        >span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                z-index: 2;
+            }
+        }
+
+        &:first-child {
+
+            >a,
+            >span {
+                margin-left: 0;
+            }
+        }
+    }
+
+    >.active {
+
+        >a,
+        >span {
+            z-index: 3;
+            color: #fff;
+            cursor: default;
+
+            &:hover,
+            &:focus {
+                z-index: 3;
+                color: #fff;
+                cursor: default;
+            }
+        }
+    }
+
+    >.disabled {
+
+        >span,
+        >a {
+            color: #bfbfbf;
+            cursor: default;
+
+            &:hover,
+            &:focus {
+                color: #bfbfbf;
+                cursor: default;
+            }
+        }
+    }
+}
+
+//* _internal/pagination.html 関連終了
+
+
+
+
+
+//* ↓ここからsyntax関連
+//* lineNosによって構造が変わるから警戒
+
+.code_block {
+    background-color: #282a36;
+    font-size: 0.92rem;
+    margin: 0;
+    padding: 1em;
+    border-radius: 6px;
+
+    // overflow-x: auto;
+    .code-filename {
+        padding: 0.5em 0;
+        // display: inline-block;
+        border-bottom: 1px solid #fff;
+
+        span {
+            color: #ffffff;
+        }
+    }
+
+    .code_body {
+        position: relative;
+
+        pre {
+            overflow-x: auto;
+        }
+
+
+        .code_copy_button {
+            cursor: pointer;
+            background: none;
+            border: none;
+            opacity: 0.8;
+            padding: 0;
+            margin: 8px;
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            svg {
+                width: 20px;
+                height: auto;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+        }
+    }
+
+
+    /* Background */
+    .bg {
+        color: #f8f8f2;
+        background-color: #282a36;
+    }
+
+    /* PreWrapper */
+    .chroma {
+        color: #f8f8f2;
+        background-color: #282a36;
+    }
+
+    /* LineLink */
+    .chroma .lnlinks {
+        outline: none;
+        text-decoration: none;
+        color: inherit
+    }
+
+    /* LineTableTD */
+    .chroma .lntd {
+        vertical-align: top;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    /* LineTable */
+    .chroma .lntable {
+        border-spacing: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    /* LineHighlight */
+    .chroma .hl {
+        background-color: #3d3f4a
+    }
+
+    /* LineNumbersTable */
+    .chroma .lnt {
+        white-space: pre;
+        -webkit-user-select: none;
+        user-select: none;
+        margin-right: 0.4em;
+        padding: 0 0.4em 0 0.4em;
+        color: #9b9b9b
+    }
+
+    /* LineNumbers */
+    .chroma .ln {
+        white-space: pre;
+        -webkit-user-select: none;
+        user-select: none;
+        margin-right: 0.4em;
+        padding: 0 0.4em 0 0.4em;
+        color: #7f7f7f
+    }
+
+    /* Line */
+    .chroma .line {
+        display: flex;
+    }
+
+    /* Keyword */
+    .chroma .k {
+        color: #ff79c6
+    }
+
+    /* KeywordConstant */
+    .chroma .kc {
+        color: #ff79c6
+    }
+
+    /* KeywordDeclaration */
+    .chroma .kd {
+        color: #8be9fd;
+        font-style: italic
+    }
+
+    /* KeywordNamespace */
+    .chroma .kn {
+        color: #ff79c6
+    }
+
+    /* KeywordPseudo */
+    .chroma .kp {
+        color: #ff79c6
+    }
+
+    /* KeywordReserved */
+    .chroma .kr {
+        color: #ff79c6
+    }
+
+    /* KeywordType */
+    .chroma .kt {
+        color: #8be9fd
+    }
+
+    /* NameAttribute */
+    .chroma .na {
+        color: #50fa7b
+    }
+
+    /* NameBuiltin */
+    .chroma .nb {
+        color: #8be9fd;
+        font-style: italic
+    }
+
+    /* NameClass */
+    .chroma .nc {
+        color: #50fa7b
+    }
+
+    /* NameFunction */
+    .chroma .nf {
+        color: #50fa7b
+    }
+
+    /* NameLabel */
+    .chroma .nl {
+        color: #8be9fd;
+        font-style: italic
+    }
+
+    /* NameTag */
+    .chroma .nt {
+        color: #ff79c6
+    }
+
+    /* NameVariable */
+    .chroma .nv {
+        color: #8be9fd;
+        font-style: italic
+    }
+
+    /* NameVariableClass */
+    .chroma .vc {
+        color: #8be9fd;
+        font-style: italic
+    }
+
+    /* NameVariableGlobal */
+    .chroma .vg {
+        color: #8be9fd;
+        font-style: italic
+    }
+
+    /* NameVariableInstance */
+    .chroma .vi {
+        color: #8be9fd;
+        font-style: italic
+    }
+
+    /* LiteralString */
+    .chroma .s {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringAffix */
+    .chroma .sa {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringBacktick */
+    .chroma .sb {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringChar */
+    .chroma .sc {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringDelimiter */
+    .chroma .dl {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringDoc */
+    .chroma .sd {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringDouble */
+    .chroma .s2 {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringEscape */
+    .chroma .se {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringHeredoc */
+    .chroma .sh {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringInterpol */
+    .chroma .si {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringOther */
+    .chroma .sx {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringRegex */
+    .chroma .sr {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringSingle */
+    .chroma .s1 {
+        color: #f1fa8c
+    }
+
+    /* LiteralStringSymbol */
+    .chroma .ss {
+        color: #f1fa8c
+    }
+
+    /* LiteralNumber */
+    .chroma .m {
+        color: #bd93f9
+    }
+
+    /* LiteralNumberBin */
+    .chroma .mb {
+        color: #bd93f9
+    }
+
+    /* LiteralNumberFloat */
+    .chroma .mf {
+        color: #bd93f9
+    }
+
+    /* LiteralNumberHex */
+    .chroma .mh {
+        color: #bd93f9
+    }
+
+    /* LiteralNumberInteger */
+    .chroma .mi {
+        color: #bd93f9
+    }
+
+    /* LiteralNumberIntegerLong */
+    .chroma .il {
+        color: #bd93f9
+    }
+
+    /* LiteralNumberOct */
+    .chroma .mo {
+        color: #bd93f9
+    }
+
+    /* Operator */
+    .chroma .o {
+        color: #ff79c6
+    }
+
+    /* OperatorWord */
+    .chroma .ow {
+        color: #ff79c6
+    }
+
+    /* Comment */
+    .chroma .c {
+        color: #6272a4
+    }
+
+    /* CommentHashbang */
+    .chroma .ch {
+        color: #6272a4
+    }
+
+    /* CommentMultiline */
+    .chroma .cm {
+        color: #6272a4
+    }
+
+    /* CommentSingle */
+    .chroma .c1 {
+        color: #6272a4
+    }
+
+    /* CommentSpecial */
+    .chroma .cs {
+        color: #6272a4
+    }
+
+    /* CommentPreproc */
+    .chroma .cp {
+        color: #ff79c6
+    }
+
+    /* CommentPreprocFile */
+    .chroma .cpf {
+        color: #ff79c6
+    }
+
+    /* GenericDeleted */
+    .chroma .gd {
+        color: #ff5555
+    }
+
+    /* GenericEmph */
+    .chroma .ge {
+        text-decoration: underline
+    }
+
+    /* GenericHeading */
+    .chroma .gh {
+        font-weight: bold
+    }
+
+    /* GenericInserted */
+    .chroma .gi {
+        color: #50fa7b;
+        font-weight: bold
+    }
+
+    /* GenericOutput */
+    .chroma .go {
+        color: #44475a
+    }
+
+    /* GenericSubheading */
+    .chroma .gu {
+        font-weight: bold
+    }
+
+    /* GenericUnderline */
+    .chroma .gl {
+        text-decoration: underline
+    }
+}
