@@ -1,0 +1,12 @@
+<section>
+    <a href="{{ .RelPermalink }}">
+        <h2>
+            {{ .LinkTitle }}
+        </h2>
+    </a>
+    {{ if findRE `<!--more-->` .RawContent }}
+    <div class="summary">
+        {{ .Summary }}
+    </div>
+    {{ end }}
+</section>

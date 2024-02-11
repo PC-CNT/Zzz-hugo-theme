@@ -1,25 +1,12 @@
 <aside id="right-sidebar">
-
-    <div>
-        <h2>何かしらのコンテンツ</h2>
-    </div>
-
     <div id="Recent_Posts">
         <h2>最近の投稿</h2>
         <ul>
             {{ range first 10 .Site.RegularPages.ByDate.Reverse }}
             <li>
-                <div>
-                    <a href="{{ .Permalink }}">
-                        <div>
-                        </div>
-                        <div>
-                            <div>
-                                {{ .Name }}
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                <a href="{{ .Permalink }}">
+                    {{ .Name }}
+                </a>
             </li>
             {{ end }}
         </ul>
@@ -34,8 +21,4 @@
         {{- .TableOfContents -}}
     </div>
     {{- end -}}
-
-    <div class="a_few_space">
-
-    </div>
 </aside>

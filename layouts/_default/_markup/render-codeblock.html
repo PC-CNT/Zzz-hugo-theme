@@ -1,3 +1,5 @@
 <div class="code_block">
-    {{- highlight (.Inner | safeHTML) .Type .Options }}
+    <div class="code_body">
+        {{- highlight (.Inner | safeHTML) .Type .Options -}}
+    </div>
 </div>
