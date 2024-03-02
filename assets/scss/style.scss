@@ -274,6 +274,10 @@ main {
     min-width: 0;
     @include box_rd_template();
 
+    display: grid;
+    grid-template-columns: auto;
+
+
 
     #permalink {
         color: #eee;
@@ -386,8 +390,12 @@ main {
         }
     }
 
+    .after-content {
+        align-self: end;
+    }
+
     .pager {
-        margin: 36px 0;
+        margin: 12px 0;
         display: flex;
         justify-content: space-between;
         border-bottom: 2px solid $color__hr__border;

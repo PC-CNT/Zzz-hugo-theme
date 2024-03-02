@@ -4,9 +4,9 @@
             {{ .LinkTitle }}
         </h2>
     </a>
-    {{ if findRE `<!--more-->` .RawContent }}
-    <div class="summary">
-        {{ .Summary }}
+    {{ with .Description }}
+    <div class="description ">
+        {{ . }}
     </div>
     {{ end }}
 </section>
