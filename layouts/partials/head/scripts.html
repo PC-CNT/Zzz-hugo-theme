@@ -24,3 +24,7 @@
 {{- if .HasShortcode "codepen" }}
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 {{ end -}}
+
+{{- if .Site.Params.norightclick -}}
+<script src="/js/migi.js"></script>
+{{- end -}}
