@@ -6,7 +6,7 @@ $bg__toc__focus: #434343;
 $text__for__darkmode: #f6f6f7;
 $bg__section__common: #303030;
 $color__hr__border: #617781;
-$width__pc: 1120px;
+$width__pc: 1080px;
 $paddig__table: 0.5em;
 
 @use "sass:color";
@@ -80,7 +80,7 @@ svg {
     h3,
     h4 {
         font-weight: bold;
-        margin-bottom: 36px;
+        margin-bottom: 1em;
         border-bottom: 2px solid $color__hr__border;
     }
 
@@ -275,7 +275,7 @@ main {
     @include box_rd_template();
 
     display: grid;
-    // grid-template-columns: 100%;
+    grid-template-columns: 100%;
 
 
 
@@ -298,8 +298,10 @@ main {
     }
 
     article {
-        padding: 24px 0;
-        margin-bottom: 36px;
+        padding-top: 24px;
+        padding-bottom: 36px;
+        margin-bottom: 24px;
+        border-bottom: 2px solid $color__hr__border;
         a {
             &:hover {
                 text-decoration: underline;
@@ -392,54 +394,60 @@ main {
 
     .after-content {
         align-self: end;
-    }
 
-    .pager {
-        margin-bottom: 36px;
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 2px solid $color__hr__border;
-        padding: 1em 0;
-
-
-        .prev {
-            // flex-basis: 48%;
-            margin-right: auto;
-            width: 50%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M40.76 163.12.2 82 40.76.88m4.48 2.24L5.8 82l39.44 78.88m0-157.76" pointer-events="all"/></svg>') no-repeat center left;
-            padding: 0 1em 0 2em;
-        }
-
-        .next {
-            border-left: 1px solid #fff;
-            text-align: right;
-            // flex-basis: 48%;
-            margin-left: auto;
-            width: 50%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M.76 160.88 40.2 82 .76 3.12M5.24.88 45.8 82 5.24 163.12M5.24.88" pointer-events="all" /></svg>') no-repeat center right;
-            padding: 0 2em 0 1em;
-        }
-    }
-
-    .box-share {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 16px;
-        margin-top: 8vh;
-        margin-bottom: 2vh;
-
-        >div {
-            svg {
-                width: 36px;
-                height: 36px;
-                transition: transform 0.3s ease;
-
-                &:hover {
-                    transform: scale(1.3);
+        .box-share {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-bottom: 4vh;
+    
+            >div {
+                svg {
+                    width: 36px;
+                    height: 36px;
+                    transition: transform 0.3s ease;
+    
+                    &:hover {
+                        transform: scale(1.3);
+                    }
                 }
             }
         }
+        .related {
+            margin-bottom: 4vh;
+        }
+    
+        .comment {
+            margin-bottom: 4vh;
+        }
+    
+        .pager {
+            margin-bottom: 4vh;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid $color__hr__border;
+            padding: 1em 0;
+    
+    
+            .prev {
+                // flex-basis: 48%;
+                margin-right: auto;
+                width: 50%;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M40.76 163.12.2 82 40.76.88m4.48 2.24L5.8 82l39.44 78.88m0-157.76" pointer-events="all"/></svg>') no-repeat center left;
+                padding: 0 1em 0 2em;
+            }
+    
+            .next {
+                border-left: 1px solid #fff;
+                text-align: right;
+                // flex-basis: 48%;
+                margin-left: auto;
+                width: 50%;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M.76 160.88 40.2 82 .76 3.12M5.24.88 45.8 82 5.24 163.12M5.24.88" pointer-events="all" /></svg>') no-repeat center right;
+                padding: 0 2em 0 1em;
+            }
+        }    
     }
 }
 

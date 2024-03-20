@@ -142,6 +142,30 @@
         </script>
     </div>
 
+    {{ with .Site.RegularPages.Related . | first 5 }}
+    <div class="related">
+        <h3>関連するページ</h3>
+        <ul>
+            {{ range . }}
+            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
+
+    {{ if .Site.Params.cusdis_id }}
+    <div class="comment">
+        <h2>コメント</h2>
+        <div id="cusdis_thread" data-theme="dark" data-host="https://cusdis.com" data-app-id="{{ .Site.Params.cusdis_id }}" data-page-id="{{ .File.UniqueID }}" data-page-url="{{ .Permalink }}" data-page-title="{{ .Title }}"></div>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+    </div>
+    {{ else if .Site.Config.Services.Disqus.Shortname }}
+    <div class="comment">
+        <h2>コメント</h2>
+        {{ template "_internal/disqus.html" . }}
+    </div>
+    {{ end }}
+
     <div class="pager">
         <div class="prev">
             {{ with .PrevInSection }}
@@ -161,29 +185,6 @@
         </div>
     </div>
 
-    {{ with .Site.RegularPages.Related . | first 5 }}
-    <div>
-        <h3>関連するページ</h3>
-        <ul>
-            {{ range . }}
-            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-            {{ end }}
-        </ul>
-    </div>
-    {{ end }}
-
-    {{ if .Site.Params.cusdis_id }}
-    <div>
-        <h2>コメント</h2>
-        <div id="cusdis_thread" data-theme="dark" data-host="https://cusdis.com" data-app-id="{{ .Site.Params.cusdis_id }}" data-page-id="{{ .File.UniqueID }}" data-page-url="{{ .Permalink }}" data-page-title="{{ .Title }}"></div>
-        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-    </div>
-    {{ else if .Site.Config.Services.Disqus.Shortname }}
-    <div>
-        <h2>コメント</h2>
-        {{ template "_internal/disqus.html" . }}
-    </div>
-    {{ end }}
 </div>
 
 {{- end -}}
