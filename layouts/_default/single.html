@@ -26,7 +26,7 @@
         {{- with .Params.tags }}
         <div class="tags">
             {{ range . }}
-            <a href="{{ absURL `tags` }}/{{ . }}" class="tag">
+            <a href="{{ absURL `tag` }}/{{ . }}" class="tag">
                 {{- . -}}
             </a>
             {{ end }}
