@@ -27,7 +27,7 @@
         <div class="tags">
             {{ range . }}
             <a href="{{ absURL `tag` }}/{{ . }}" class="tag">
-                {{- . -}}
+                #{{- . -}}
             </a>
             {{ end }}
         </div>
