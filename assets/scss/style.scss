@@ -75,6 +75,10 @@ svg {
 
 .container {
 
+    h1 {
+        font-size: 2em;
+    }
+
     h1,
     h2,
     h3,
@@ -166,7 +170,7 @@ header {
         grid-template-areas:
             "main right_sidebar"
         ;
-        grid-template-columns: minmax(auto, 52vw) 320px;
+        grid-template-columns: minmax(auto, 720px) 320px;
         grid-template-rows: 1fr;
         // padding: 0px calc(min(8em, 80px));
         padding: 0px 2em;
@@ -182,7 +186,7 @@ header {
         grid-template-areas:
             "main"
         ;
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(auto, 640px);
         grid-template-rows: 1fr;
         padding: 0 0.5rem;
     }
@@ -190,6 +194,8 @@ header {
     #right-sidebar {
         display: none;
     }
+
+
 }
 
 
