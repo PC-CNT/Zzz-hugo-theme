@@ -208,7 +208,7 @@ header {
 
             li {
                 border-bottom: 1px #707070 solid;
-                margin-bottom: 12px;
+                margin-bottom: 16px;
 
                 a {
                     &:hover {
@@ -274,8 +274,8 @@ main {
     min-width: 0;
     @include box_rd_template();
 
-    display: grid;
-    grid-template-columns: 100%;
+    // display: grid;
+    // grid-template-columns: 100%;
 
 
 
@@ -405,7 +405,6 @@ main {
     }
 
     .after-content {
-        align-self: end;
 
         .box-share {
             display: flex;
