@@ -1,5 +1,7 @@
 <script src="/js/code.js" defer></script>
+{{ if .IsPage }}
 <script src="/js/toc.js" defer></script>
+{{ end }}
 {{- if .HasShortcode "soundcloud" }}
 <script>
     window.addEventListener("DOMContentLoaded", function() {
