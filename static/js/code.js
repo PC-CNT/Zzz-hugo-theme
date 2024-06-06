@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (article) {
         article.querySelectorAll(`a`).forEach((a) => {
             if (a.getAttribute("href").match(/^#fn:/)) {
-                // console.log(a)
                 //* https://jun-app.com/articles/queryselector-error-with-numeric
                 a.setAttribute("title", document.querySelector(`[id="${a.getAttribute("href").slice(1)}"]`).innerText)
             }
