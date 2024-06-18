@@ -8,6 +8,12 @@
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
 
+{{- if .Params.noindex }}
+<meta name="robots" content="none" />
+{{ end -}}
+
+<meta name="Hatena::Bookmark" content="nocomment" />
+
 <link rel="alternate" href="{{ absURL `index.xml` }}" type="application/rss+xml" title="RSS">
 
 {{ if .Params.Description -}}

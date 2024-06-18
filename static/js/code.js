@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // 
             })
         })
-        code_block.querySelector(`.code_body`).appendChild(copy_button);
+        code_block.appendChild(copy_button);
 
 
 
@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data_lang.match(/:(.+)/)) {
             code_block.insertAdjacentHTML("afterbegin", `<div class="code-filename"><span>${data_lang.match(/:(.+)/)[1]}</span></div>`);
         } else {
-            code_block.insertAdjacentHTML("afterbegin", `<div class="code-filename"><span>${data_lang}</span></div>`);
+            // code_block.insertAdjacentHTML("afterbegin", `<div class="code-filename"><span>${data_lang}</span></div>`);
+            return
         }
     })
 
