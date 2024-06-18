@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data_lang.match(/:(.+)/)) {
             code_block.insertAdjacentHTML("afterbegin", `<div class="code-filename"><span>${data_lang.match(/:(.+)/)[1]}</span></div>`);
         } else {
-            code_block.insertAdjacentHTML("afterbegin", `<div class="code-filename"><span>${data_lang}</span></div>`);
+            // code_block.insertAdjacentHTML("afterbegin", `<div class="code-filename"><span>${data_lang}</span></div>`);
+            return
         }
     })
 
