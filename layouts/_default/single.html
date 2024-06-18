@@ -23,12 +23,13 @@
             <a href="{{ .Permalink }}" id="permalink">{{ .Title }}</a>
         </h1>
 
-        {{- with .Params.tags }}
+        {{- with .GetTerms "tags" }}
         <div class="tags">
             {{ range . }}
-            <a href="{{ `tag` | relLangURL }}/{{ . | urlize }}" class="tag">
-                #{{- . -}}
-            </a>
+            <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            <!-- <a href="{{ `tag` | relLangURL }}/{{ . | urlize }}" class="tag"> -->
+                <!-- #{{- . -}} -->
+            <!-- </a> -->
             {{ end }}
         </div>
         {{ end -}}
