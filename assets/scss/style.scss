@@ -599,8 +599,8 @@ footer {
     margin: 0;
     padding: 0.5em 1em;
     border-radius: 6px;
+    position: relative;
 
-    // overflow-x: auto;
     .code-filename {
         padding: 0.5em 0;
         // display: inline-block;
@@ -611,34 +611,37 @@ footer {
         }
     }
 
+    .code_copy_button {
+        cursor: pointer;
+        background: none;
+        border: none;
+        opacity: 0.8;
+        padding: 0;
+        margin: 8px;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        svg {
+            width: 20px;
+            height: auto;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1.3);
+            }
+        }
+    }
+
     .code_body {
         position: relative;
 
-        pre {
+        .chroma {
             overflow-x: auto;
         }
 
-
-        .code_copy_button {
-            cursor: pointer;
-            background: none;
-            border: none;
-            opacity: 0.8;
-            padding: 0;
-            margin: 8px;
-            position: absolute;
-            top: 0;
-            right: 0;
-
-            svg {
-                width: 20px;
-                height: auto;
-                transition: transform 0.3s ease;
-
-                &:hover {
-                    transform: scale(1.3);
-                }
-            }
+        pre {
+            overflow-x: auto;
         }
     }
 

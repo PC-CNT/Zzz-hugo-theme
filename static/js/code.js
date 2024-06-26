@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // 
             })
         })
-        code_block.querySelector(`.code_body`).appendChild(copy_button);
+        code_block.appendChild(copy_button);
 
 
 
