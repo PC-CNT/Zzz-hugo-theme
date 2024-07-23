@@ -97,6 +97,7 @@
                     </svg>
                 </a>
             </div>
+            {{- if .Site.Params.Share.Reddit }}
             <div>
                 <a href="https://reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" title="Reddit" rel="nofollow" target="_blank">
                     <svg viewBox="-269 361 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -107,6 +108,7 @@
                     </svg>
                 </a>
             </div>
+            {{ end -}}
             {{- if .Site.Params.Share.Hatena }}
             <div>
                 <a href="https://b.hatena.ne.jp/entry/{{ .Permalink }}" title="このエントリーをはてなブックマークに追加" rel="nofollow" target="_blank">
