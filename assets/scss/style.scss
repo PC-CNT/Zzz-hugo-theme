@@ -17,11 +17,20 @@ $paddig__table: 0.5em;
     background-color: $bg__box__01;
 }
 
-@mixin a__hover__color($color: #4141ff) {
+@mixin a__color__settings($color: #1feb8c) {
     color: $color;
-
-    &:hover {
-        color: color.scale($color, $lightness: 44%);
+    &:link {
+        color: $color;
+    }
+    &:visited {
+        $color_visited: color.adjust($color, $hue: -20, $saturation: -20%, $lightness: -20%);
+        color: $color_visited;
+        &:hover, &:active {
+            color: color.scale($color_visited, $lightness: 50%);
+        }
+    }
+    &:hover, &:active {
+        color: color.scale($color, $lightness: 50%);
     }
 }
 
@@ -35,7 +44,7 @@ $paddig__table: 0.5em;
 
 
 html {
-    font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Hiragino Sans", "Segoe UI", "Roboto", sans-serif;
+    font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Hiragino Sans", "HackGen Console NFJ" "Segoe UI", "Roboto", sans-serif;
     font-feature-settings: "palt"1;
     color: $text__for__darkmode;
     height: 100%;
@@ -59,7 +68,11 @@ body {
 a {
     text-decoration: none;
     word-wrap: break-word;
-    background-color: transparent;
+    // background-color: transparent;
+    @include a__color__settings();
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 code {
