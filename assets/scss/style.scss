@@ -43,6 +43,12 @@ $paddig__table: 0.5em;
 // }
 
 
+// * {
+//     outline: 1px solid #ff5555;
+// }
+
+
+
 html {
     font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Hiragino Sans", "HackGen Console NFJ" "Segoe UI", "Roboto", sans-serif;
     font-feature-settings: "palt"1;
@@ -330,7 +336,7 @@ main {
     article {
         a {
             &:hover {
-                text-decoration: underline;
+                // text-decoration: underline;
             }
         }
 
@@ -338,19 +344,20 @@ main {
             margin-bottom: 36px;
 
             nav.breadcrumb {
-
-                // list-style: none;
                 ul {
                     display: flex;
                     flex-wrap: wrap;
                     list-style: none;
                     padding: 0;
-
-                    li:not(:last-child)::after {
-                        display: inline-block;
-                        content: "»";
-                        margin-left: 6px;
-                        margin-right: 6px;
+                    li {
+                        // *https://zenn.dev/jiin/articles/370909a1c56f5a
+                        display: flex;
+                        &:not(:last-child)::after {
+                            display: inline-block;
+                            content: "»";
+                            margin-left: 4px;
+                            margin-right: 4px;
+                        }
                     }
                 }
             }
