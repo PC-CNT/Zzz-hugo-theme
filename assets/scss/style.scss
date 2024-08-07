@@ -244,12 +244,6 @@ header {
             li {
                 // border-bottom: 1px #707070 solid;
                 margin-bottom: 1em;
-
-                a {
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
             }
         }
     }
@@ -324,24 +318,15 @@ main {
         cursor: pointer;
 
         a {
-
-            // color: $text__for__darkmode;
             &:hover {
                 opacity: 0.8;
-                text-decoration: underline;
             }
         }
     }
 
     article {
-        a {
-            &:hover {
-                // text-decoration: underline;
-            }
-        }
-
         #before-content {
-            margin-bottom: 36px;
+            margin-bottom: 48px;
 
             nav.breadcrumb {
                 ul {
@@ -355,20 +340,20 @@ main {
                         &:not(:last-child)::after {
                             display: inline-block;
                             content: "»";
-                            margin-left: 4px;
-                            margin-right: 4px;
+                            margin: 0 6px;
                         }
                     }
                 }
             }
         }
 
-        .tag {
+        a.tag {
             background-color: #333;
             border-radius: 4px;
             padding: 4px 6px;
-            color: $text__for__darkmode;
-            margin-right: 8px;
+            &:link,&:visited {
+                color: $text__for__darkmode;
+            }
         }
     }
 
