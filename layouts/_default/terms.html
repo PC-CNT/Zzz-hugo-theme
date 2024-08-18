@@ -1,0 +1,13 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+{{- $plural := .Data.Plural }}
+{{- range $index, $term := .Data.Terms.ByCount }}
+<section>
+    <a href="{{ $.Site.LanguagePrefix }}/{{ $plural }}/{{ $term.Name | urlize }}">{{ $term.Page.Title }}</a>
+    ({{ $term.Count }})
+</section>
+{{- end }}
+
+{{ end }}

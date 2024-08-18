@@ -8,19 +8,17 @@
 </head>
 
 <body>
-    <div id="box">
-        <div id="content-wrapper">
-            {{ partial "header/header.html" . }}
-            <div class="container">
-                <main>
-                    {{ block "main" . }}{{ end }}
-                </main>
-                {{- partial "side/right-sidebar.html" . -}}
-            </div>
-            <footer>
-                {{ block "footer" . }}{{ partial "footer/footer.html" . }}{{ end }}
-            </footer>
+    <div id="content-wrapper">
+        {{ partial "header/header.html" . }}
+        <div class="container">
+            <main>
+                {{ block "main" . }}{{ end }}
+            </main>
+            {{- partial "side/right-sidebar.html" . -}}
         </div>
+        <footer>
+            {{ block "footer" . }}{{ partial "footer/footer.html" . }}{{ end }}
+        </footer>
     </div>
 </body>
 

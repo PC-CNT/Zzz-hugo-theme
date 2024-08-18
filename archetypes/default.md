@@ -4,5 +4,10 @@ date: {{ .Date }}
 description: ""
 image: ""
 draft: true
-tags: []
+tags: [
+    
+]
+build: {
+    list: "always"
+}
 ---

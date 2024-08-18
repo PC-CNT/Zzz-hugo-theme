@@ -1,31 +1,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>
-    {{- with .Params.Title -}}{{ . }} | {{ end }}{{- .Site.Title -}}
-</title>
-<meta property="og:title" content="{{- with .Params.Title -}}{{ . }} | {{ end }}{{- .Site.Title -}}">
+{{- $title := (print .Title " | " .Site.Title) -}}
+{{- if eq .Site.Title .Title }}
+{{- $title = .Site.Title -}}
+{{ end -}}
+<title>{{ $title }}</title>
+<meta property="og:title" content="{{ $title }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
 
-{{- if .Params.noindex }}
-<meta name="robots" content="none" />
-{{ end -}}
-
-<meta name="Hatena::Bookmark" content="nocomment" />
-
-<link rel="alternate" href="{{ absURL `index.xml` }}" type="application/rss+xml" title="RSS">
-
-{{ if .Params.Description -}}
+{{- if .Params.Description -}}
 <meta name="description" content="{{ .Params.Description }}">
 <meta property="og:description" content="{{ .Params.Description }}">
 {{- else if .Summary -}}
-<meta name="description" content="{{ .Summary }}">
-<meta property="og:description" content="{{ .Summary }}">
-{{- else -}}
-<meta name="description" content="{{ .Site.Title }}">
-<meta property="og:description" content="{{ .Site.Title }}">
+<meta name="description" content="{{ .Summary | plainify }}">
+<meta property="og:description" content="{{ .Summary | plainify }}">
+{{- else }}
+<meta name="description" content="{{ or .Site.Params.Descriptiono .Site.Title }}">
+<meta property="og:description" content="{{ or .Site.Params.Description .Site.Title }}">
 {{- end -}}
+
 
 {{- if .IsHome -}}
 <meta property="og:type" content="website">
@@ -34,13 +29,17 @@
 <meta property="article:section" content="{{ .Section }}">
 {{- end -}}
 
-{{- if .Page.Resources.GetMatch .Params.image -}}
-<meta property="og:image" content="{{ (.Page.Resources.GetMatch .Params.image).Permalink }}">
+{{- $thumb := $.Params.image -}}
+<meta name="thumbnail" content="{{ $thumb }}">
+
+
+
+{{- if .Page.Resources.Get .Params.image -}}
+<meta property="og:image" content="{{ (.Resources.Get .Params.image).Permalink }}">
 {{ else if .Site.Params.favicon }}
 <meta property="og:image" content="{{ .Site.Params.favicon | absURL }}">
 {{- end }}
 
-<!-- {{ template "_internal/twitter_cards.html" . }} -->
 
 {{- $images := partial "_funcs/get-page-images" . }}
 {{- with index $images 0 }}
@@ -50,9 +49,8 @@
 <meta name="twitter:card" content="summary">
 {{- end }}
 
-{{- with or .Title site.Title site.Params.title | plainify }}
-<meta name="twitter:title" content="{{ . }}">
-{{- end }}
+
+<meta name="twitter:title" content="{{ $title }}">
 
 {{- with or .Description .Summary site.Params.description .Site.Title | plainify | htmlUnescape | chomp }}
 <meta name="twitter:description" content="{{ . }}">
@@ -70,6 +68,15 @@
 {{- end }}
 {{- end }}
 {{- end }}
+
+
+{{- if (or .Params.noindex ) }}
+<meta name="robots" content="none" />
+{{ end -}}
+
+<meta name="Hatena::Bookmark" content="nocomment" />
+
+<link rel="alternate" href="{{ absURL `index.xml` }}" type="application/rss+xml" title="RSS">
 
 {{- with .Site.Params.favicon -}}
 {{ if eq ( path.Ext .) ".svg" }}

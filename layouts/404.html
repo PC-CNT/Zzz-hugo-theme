@@ -2,7 +2,9 @@
 
 <div>
     <h1>404 Not Found!</h1>
-    <p>どうやらページが存在しないようです……</p>
+    {{- with .Site.Params.notfound }}
+    <p>{{ . }}</p>
+    {{ end -}}
 </div>
 
 {{ end }}

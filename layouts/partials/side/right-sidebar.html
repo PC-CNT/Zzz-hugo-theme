@@ -1,4 +1,25 @@
 <aside id="right-sidebar">
+    {{- if .Site.GetPage "/about" }}
+    <div id="fixed_pages">
+        {{- with .Site.GetPage "/about" }}
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ end -}}
+    </div>
+    {{ end -}}
+
+    {{- if .Site.Params.showlink }}
+    <div id="links">
+        <h2>Links</h2>
+        <ul>
+            {{- range .Site.Params.links }}
+            <li>
+                <a target="_blank" href="{{- .url -}}">{{- .name -}}</a>
+            </li>
+            {{ end -}}
+        </ul>
+    </div>
+    {{ end -}}
+
     <div id="Recent_Posts">
         <h2>最新記事</h2>
         <ul>
