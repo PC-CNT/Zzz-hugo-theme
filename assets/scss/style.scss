@@ -50,8 +50,8 @@ $paddig__table: 0.5em;
 
 
 html {
-    font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Hiragino Sans", "HackGen Console NFJ" "Segoe UI", "Roboto", sans-serif;
-    font-feature-settings: "palt"1;
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "HackGen Console NFJ" "源ノ角ゴシック Code JP", "Source Han Code JP", "system-ui";
+    // font-feature-settings: "palt"1;
     font-size: 1em;
     color: $text__for__darkmode;
     -webkit-text-size-adjust: 100%;
@@ -387,18 +387,18 @@ main {
     }
 
     img {
-        max-height: 64vh;
+        max-height: 50vh;
         margin: 1em 0;
     }
 
     figure {
-        margin: 2em 0;
+        margin: 1em 0;
         text-align: center;
         img {
             margin: 0 auto;
         }
         figcaption {
-            margin: 1em 0;
+            margin-top: 1em;
         }
     }
 

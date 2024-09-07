@@ -60,7 +60,6 @@
             <height>64</height>
         </image>
         {{ end }}
-        <generator>Hugo</generator>
         <language>{{ site.Language.LanguageCode }}</language>
         {{ with $authorEmail }}
         <managingEditor>{{.}}{{ with $authorName }} ({{ . }}){{ end }}</managingEditor>

@@ -7,11 +7,11 @@
     </div>
     {{ end -}}
 
-    {{- if .Site.Params.showlink }}
+    {{- with .Site.Params.links }}
     <div id="links">
         <h2>Links</h2>
         <ul>
-            {{- range .Site.Params.links }}
+            {{- range . }}
             <li>
                 <a target="_blank" href="{{- .url -}}">{{- .name -}}</a>
             </li>

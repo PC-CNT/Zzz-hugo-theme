@@ -1,5 +1,11 @@
 <figure>
-<img src="{{ .Destination | safeURL }}" {{- with .Text }} alt="{{ . }}" {{ end -}} {{- with .Title }} title="{{ . }}" {{ end -}} loading="lazy">
+<!-- <a target="_blank" href="{{ .Destination | safeURL }}" {{- with .Title }} title="{{ . }}" {{ end -}}> -->
+    {{- if (urls.Parse .Destination).IsAbs }}
+    <img src="{{ (.Destination | safeURL) }}" {{- with .Text }} alt="{{ . }}" {{ end -}} loading="lazy">
+    {{ else }}
+    <img src="{{ urls.JoinPath .Page.Permalink (.Destination | safeURL) }}" {{- with .Text }} alt="{{ . }}" {{ end -}} loading="lazy">
+    {{ end -}}
+<!-- </a> -->
 {{- with .Title }}
 <figcaption>{{ . }}</figcaption>
 {{ end -}}
