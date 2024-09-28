@@ -5,6 +5,12 @@
         {{- if eq .Kind "section" }}
             {{ continue }}
         {{ end -}}
+        {{- if eq .Kind "term" }}
+            {{ continue }}
+        {{ end -}}
+        {{- if eq .Kind "taxonomy" }}
+            {{ continue }}
+        {{ end -}}
         {{- if (hasPrefix .RelPermalink "/tags/") }}
             {{ continue }}
         {{ end -}}

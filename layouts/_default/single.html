@@ -27,9 +27,6 @@
         <div class="tags">
             {{ range . }}
             <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-            <!-- <a href="{{ `tag` | relLangURL }}/{{ . | urlize }}" class="tag"> -->
-            <!-- #{{- . -}} -->
-            <!-- </a> -->
             {{ end }}
         </div>
         {{ end -}}

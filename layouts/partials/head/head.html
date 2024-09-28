@@ -76,7 +76,10 @@
 
 <meta name="Hatena::Bookmark" content="nocomment" />
 
-<link rel="alternate" href="{{ absURL `index.xml` }}" type="application/rss+xml" title="RSS">
+{{ range .AlternativeOutputFormats -}}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}">
+{{ end -}}
+
 
 {{- with .Site.Params.favicon -}}
 {{ if eq ( path.Ext .) ".svg" }}
