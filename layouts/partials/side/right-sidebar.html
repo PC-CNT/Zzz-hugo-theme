@@ -23,7 +23,7 @@
     <div id="Recent_Posts">
         <h2>最新記事</h2>
         <ul>
-            {{ range first 10 .Site.RegularPages.ByDate.Reverse }}
+            {{ range first 10 (where .Site.RegularPages.ByDate.Reverse "Params.hide" "!=" true) }}
             <li>
                 <a href="{{ .Permalink }}">
                     {{ .Name }}

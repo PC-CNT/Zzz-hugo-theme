@@ -1,6 +1,6 @@
 {{- define "main" -}}
 <div>
-    {{ $paginator := .Paginate (.Site.RegularPages.ByDate.Reverse) 10 }}
+    {{ $paginator := .Paginate (where .Site.RegularPages.ByDate.Reverse "Params.hide" "!=" true) 10 }}
     {{ range $paginator.Pages }}
         {{ partial "page_block" . }}
     {{ end }}

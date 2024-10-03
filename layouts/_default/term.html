@@ -3,7 +3,7 @@
 <h1>{{ .Title }}</h1>
 <!-- <h1>{{ .Section }}</h1> -->
 
-{{ range (where .Pages "Params.hide" "!=" true) }}
+{{ range .Pages }}
 {{ partial "page_block" . }}
 {{ end }}
 

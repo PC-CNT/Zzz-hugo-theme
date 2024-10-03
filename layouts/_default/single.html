@@ -57,7 +57,8 @@
     {{ end -}}
 
     <div id="content">
-        {{ (replace .Content .Summary "") | safeHTML }}
+        <!-- {{ (replace .Content .Summary "") | safeHTML }} -->
+        {{ .ContentWithoutSummary }}
     </div>
 
     {{- if not .Params.onlycontent }}

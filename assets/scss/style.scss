@@ -185,11 +185,11 @@ header {
 @media screen and (min-width: $width__pc) {
     .container {
         display: grid;
-        column-gap: calc((100vw - $width__pc) * 0.04 + 1vw);
+        column-gap: calc((100vw - $width__pc) * 0.02 + 1vw);
         grid-template-areas:
             "main right_sidebar"
         ;
-        grid-template-columns: minmax(auto, 820px) 320px;
+        grid-template-columns: minmax(auto, 840px) 320px;
         grid-template-rows: 1fr;
         padding: 0 6vw;
         // place-content: center;
@@ -426,35 +426,28 @@ main {
         .alert-heading {
             font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
         }
-        &.alert-note {
-            border-color: $color__note;
+
+        @mixin alert-color($color) {
+            border-color: $color;
             .alert-heading {
-                color: $color__note;
+                color: $color;
             }
+        }
+
+        &.alert-note {
+            @include alert-color($color__note);
         }
         &.alert-tip {
-            border-color: $color__tip;
-            .alert-heading {
-                color: $color__tip;
-            }
+            @include alert-color($color__tip);
         }
         &.alert-important {
-            border-color: $color__important;
-            .alert-heading {
-                color: $color__important;
-            }
+            @include alert-color($color__important);
         }
         &.alert-warning {
-            border-color: $color__warning;
-            .alert-heading {
-                color: $color__warning;
-            }
+            @include alert-color($color__warning);
         }
         &.alert-caution {
-            border-color: $color__caution;
-            .alert-heading {
-                color: $color__caution;
-            }
+            @include alert-color($color__caution);
         }
     }
 
@@ -500,8 +493,7 @@ main {
             display: -webkit-box;
             overflow: hidden;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
+            -webkit-line-clamp: 2;
         }
 
         .section-title {

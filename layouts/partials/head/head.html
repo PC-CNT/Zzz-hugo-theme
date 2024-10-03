@@ -10,14 +10,14 @@
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
 
-{{- if .Params.Description -}}
-<meta name="description" content="{{ .Params.Description }}">
-<meta property="og:description" content="{{ .Params.Description }}">
-{{- else if .Summary -}}
-<meta name="description" content="{{ .Summary | plainify }}">
-<meta property="og:description" content="{{ .Summary | plainify }}">
+{{- with .Params.Description -}}
+<meta name="description" content="{{ . }}">
+<meta property="og:description" content="{{ . }}">
+{{- else with .Summary -}}
+<meta name="description" content="{{ . | plainify }}">
+<meta property="og:description" content="{{ . | plainify }}">
 {{- else }}
-<meta name="description" content="{{ or .Site.Params.Descriptiono .Site.Title }}">
+<meta name="description" content="{{ or .Site.Params.Description .Site.Title }}">
 <meta property="og:description" content="{{ or .Site.Params.Description .Site.Title }}">
 {{- end -}}
 
