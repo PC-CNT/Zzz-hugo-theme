@@ -4,6 +4,7 @@ date: {{ .Date }}
 description: ""
 image: ""
 draft: true
+hide: false
 tags: [
     
 ]
